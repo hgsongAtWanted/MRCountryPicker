@@ -154,4 +154,16 @@ open class MRCountryPicker: UIPickerView, UIPickerViewDelegate, UIPickerViewData
             countryPickerDelegate.countryPhoneCodePicker(self, didSelectCountryWithName: country.name!, countryCode: country.code!, phoneCode: country.phoneCode!, flag: country.flag!)
         }
     }
+    
+    open func removeCountryWithExcepts(_ exceptCountryCodes:[String]) {
+        var out = [Country]()
+        for item in exceptCountryCodes {
+            for country in self.countries {
+                guard country.code == item else { continue }
+                out.append(country)
+            }
+        }
+        
+        self.countries = out
+    }
 }
